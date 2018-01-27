@@ -43,6 +43,10 @@ public class Thrust : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ThrustAmount();
+
+        print(GvrControllerInput.TouchPosCentered.y);
+
         Emissions();
     }
 
@@ -100,14 +104,25 @@ public class Thrust : MonoBehaviour
         }
     }
 
+    void ThrustAmount()
+    {
+        if (GvrControllerInput.TouchPosCentered.y > -0.5 && GvrControllerInput.State == GvrConnectionState.Connected){
+            float amount = GvrControllerInput.TouchPosCentered.y;
+            
+            if(amount < 0)
+                _mainThrust = Math.Abs(amount) * 15;
+            else
+                _mainThrust = 0.5f + amount * 15;
+        }
+        else
+            _mainThrust = 0;
+    }
+
     void FixedUpdate()
     {
         Quaternion vesselOrientation = vessel.transform.rotation;
 
-        if (GvrControllerInput.TouchPosCentered.y > 0)
-            _mainThrust = GvrControllerInput.TouchPosCentered.y * 15;
-        else
-            _mainThrust = 0;
+        
 
         if (_controllerInput.ThrustPowerControls)
         {
