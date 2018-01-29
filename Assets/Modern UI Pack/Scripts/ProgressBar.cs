@@ -20,6 +20,8 @@ public class ProgressBar : MonoBehaviour {
 			currentPercent += speed * Time.deltaTime;
 		}
 		loadingBar.GetComponent<Image> ().fillAmount = currentPercent / 100;
-		textPercent.GetComponent<Text> ().text = ((int)currentPercent).ToString ("F0") + "%";
+		
+		if(isOn)
+			textPercent.GetComponent<Text> ().text = ((int)currentPercent).ToString ("F0") + "%";
 	}
 }

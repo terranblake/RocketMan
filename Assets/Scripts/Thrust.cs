@@ -45,7 +45,7 @@ public class Thrust : MonoBehaviour
     {
         ThrustAmount();
 
-        print(GvrControllerInput.TouchPosCentered.y);
+        //print(GvrControllerInput.TouchPosCentered.y);
 
         Emissions();
     }

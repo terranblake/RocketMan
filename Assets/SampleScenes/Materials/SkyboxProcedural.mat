@@ -56,7 +56,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AlphaTestRef: 0.5
-    - _AtmosphereThickness: 0.69
+    - _AtmosphereThickness: 0.85
     - _BumpScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -71,7 +71,7 @@ Material:
     - _SkyExponent: 2
     - _SrcBlend: 1
     - _SunDisk: 1
-    - _SunSize: 0.722
+    - _SunSize: 0.25
     - _SunSizeConvergence: 5
     - _SunStrength: 1
     - _UVSec: 0
@@ -84,7 +84,7 @@ Material:
     - _GroundColor: {r: 0.972, g: 1, b: 0.841, a: 1}
     - _SkyEquatorColor: {r: 0.188311, g: 0.24798155, b: 0.31617647, a: 1}
     - _SkyMidColor: {r: 0.13327208, g: 0.16961901, b: 0.21323532, a: 1}
-    - _SkyTint: {r: 0.716, g: 1, b: 1, a: 1}
+    - _SkyTint: {r: 0.10121107, g: 0.5735294, b: 0.5735294, a: 1}
     - _SkyTopColor: {r: 0.08742432, g: 0.11787318, b: 0.1544118, a: 1}
     - _SpecularColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _SunTint: {r: 0.99607843, g: 0.99607843, b: 0.99607843, a: 1}
