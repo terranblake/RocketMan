@@ -8,7 +8,7 @@ public class ConsoleController : MonoBehaviour
     public Camera[] CameraArray;
     public Material ConsoleDisplayMaterial;
     public RenderTexture DisplayTexture;
-    public ProgressBar ThrottleDisplay;
+    //public ProgressBar ThrottleDisplay;
     public Text ThrottleTextDisplay;
     public Thrust ThrustScript;
     public Image mainDisplayImage;
@@ -16,9 +16,9 @@ public class ConsoleController : MonoBehaviour
     public Material InfoMaterial;
     public Text InfoText;
 
-    public ProgressBar XRotationDisplay;
-    public ProgressBar YRotationDisplay;
-    public ProgressBar ZRotationDisplay;
+    //public ProgressBar XRotationDisplay;
+    //public ProgressBar YRotationDisplay;
+    //public ProgressBar ZRotationDisplay;
 
     public AudioSource selectionSound;
 
@@ -117,13 +117,13 @@ public class ConsoleController : MonoBehaviour
     void RotationProgressBars(){
         Vector3 controllerOrientation = GvrControllerInput.Orientation.eulerAngles;
 
-        XRotationDisplay.currentPercent = (Mathf.Abs(controllerOrientation.x) / 360) * 100;
-        YRotationDisplay.currentPercent = (Mathf.Abs(controllerOrientation.y) / 360) * 100;
-        ZRotationDisplay.currentPercent = (Mathf.Abs(controllerOrientation.z) / 360) * 100;
+        //XRotationDisplay.currentPercent = (Mathf.Abs(controllerOrientation.x) / 360) * 100;
+        //YRotationDisplay.currentPercent = (Mathf.Abs(controllerOrientation.y) / 360) * 100;
+        //ZRotationDisplay.currentPercent = (Mathf.Abs(controllerOrientation.z) / 360) * 100;
     }
 
     void ThrottleProgressBar(){
-        ThrottleDisplay.currentPercent = (ThrustScript._mainThrust / 18) * 100;
-        ThrottleTextDisplay.text = ((int)ThrottleDisplay.currentPercent).ToString();
+        //ThrottleDisplay.currentPercent = (ThrustScript._mainThrust / 18) * 100;
+        //ThrottleTextDisplay.text = ((int)ThrottleDisplay.currentPercent).ToString();
     }
 }

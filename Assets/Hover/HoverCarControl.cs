@@ -34,9 +34,9 @@ public class HoverCarControl : MonoBehaviour
 
   void OnDrawGizmos()
   {
-    if(Time.frameCount % 100 == 0){
+    if(Time.frameCount % 50 == 0){
       _hoverHeight_Static = m_hoverHeight;
-      m_hoverHeight = _hoverHeight_Static + Random.Range(-0.05f, 0.05f);
+      m_hoverHeight = _hoverHeight_Static;
     }
 
     //  Hover Force
@@ -87,13 +87,13 @@ public class HoverCarControl : MonoBehaviour
     for (int i = 0; i < m_hoverPoints.Length; i++)
     {
       var hoverPoint = m_hoverPoints [i];
-      if (Physics.Raycast(hoverPoint.transform.position, 
+      if (Physics.Raycast(hoverPoint.transform.position,
                           -Vector3.up, out hit,
                           m_hoverHeight,
                           m_layerMask))
-        m_body.AddForceAtPosition(Vector3.up 
+        m_body.AddForceAtPosition(Vector3.up
           * m_hoverForce
-          * (1.0f - (hit.distance / m_hoverHeight) + Random.Range(-0.01f, 0.01f)), 
+          * (1.0f - (hit.distance / m_hoverHeight) + Random.Range(0.00f, 0.01f)),
                                   hoverPoint.transform.position);
       else
       {
