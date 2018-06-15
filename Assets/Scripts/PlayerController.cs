@@ -9,6 +9,12 @@ public class PlayerController : MonoBehaviour
     public Camera PlayerCamera;
     public Inventory inventory;
 
+    void Awake()
+    {
+        Debug.Log(string.Format("Ignoring collision between <{0}> and <{1}>", LayerMask.LayerToName(8), LayerMask.LayerToName(9)));
+        Debug.Log(Physics.GetIgnoreLayerCollision(8, 9));
+    }
+
     void Start()
     {
         // Initialize inventory selection
@@ -20,16 +26,17 @@ public class PlayerController : MonoBehaviour
         // Check for updates to inventory
         inventory.ItemSelection();
 
-		// Add item to inventory
+        // Add item to inventory
         if (Input.GetKeyDown(KeyCode.E))
         {
             CastForInteractables();
         }
 
-		// Drop item from inventory
-		if (Input.GetKeyDown(KeyCode.Q)){
-			inventory.DropItem();
-		}
+        // Drop item from inventory
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            inventory.DropItem();
+        }
     }
 
     void CastForInteractables()

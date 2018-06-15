@@ -48,6 +48,7 @@ public class Inventory : MonoBehaviour
         // Check if inventory is empty
         if (transform.childCount != 0)
         {
+            // TODO :: Handle case when user has already dropped the currently selected item
             // Find item
             Transform Item = transform.GetChild(selectedItem);
 
