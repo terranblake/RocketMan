@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33289018008246694}
   - component: {fileID: 23948793950468712}
   m_Layer: 0
-  m_Name: SMG
+  m_Name: SubMachineGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,7 +48,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1641596422970926
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
@@ -58,6 +58,21 @@ GameObject:
   - component: {fileID: 23239183907664348}
   m_Layer: 0
   m_Name: TriggerC
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1665324511029282
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4226627181556532}
+  m_Layer: 0
+  m_Name: MuzzleFlash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,12 +101,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1641596422970926}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.0283, z: -0.0508}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.028299987, z: -0.050799847}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4223060283578138}
-  m_RootOrder: 2
+  m_Father: {fileID: 4796698145242456}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4223060283578138
 Transform:
@@ -100,14 +115,26 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1527735495964316}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.075822, y: 0.35893178, z: 6.0134077}
+  m_LocalPosition: {x: 6.97, y: 0, z: -3.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4796698145242456}
   - {fileID: 4286700505829704}
-  - {fileID: 4098726232929996}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4226627181556532
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1665324511029282}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.0023, y: 0.0472, z: 0.2087}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4796698145242456}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4286700505829704
 Transform:
@@ -131,7 +158,9 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4098726232929996}
+  - {fileID: 4226627181556532}
   m_Father: {fileID: 4223060283578138}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -287,8 +316,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAmmo: 999
-  muzzleFlashes: []
-  muzzleFlashEffect: {fileID: 0}
+  muzzleFlashes:
+  - {fileID: 1665324511029282}
+  muzzleFlashEffect: {fileID: 1000010254994808, guid: 9defeac88977c0d448aa4541073ee9e4,
+    type: 2}
   impactEffect: {fileID: 1214919753986378, guid: e1d2fb22d15f9984b90613ea990ef4e7,
     type: 2}
   pulseEffects: []
@@ -307,6 +338,8 @@ MonoBehaviour:
   IsDropped: 0
   DroppedEffect: {fileID: 1535970678749264, guid: 7c4dc01f5f14d674e8117375ec02cc54,
     type: 2}
-  health: -1
+  dropOutlineSize: 0.02
+  dropColor: {r: 1, g: 0, b: 1, a: 0}
   destroyEffect: {fileID: 0}
   attributes: {fileID: 11400000, guid: 887879ba5302a6245bd1e092ef10a35e, type: 2}
+  _canBeDestroyed: 1

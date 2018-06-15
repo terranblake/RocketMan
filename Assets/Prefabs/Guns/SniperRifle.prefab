@@ -63,9 +63,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1761727759870712
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4929939614537400}
+  m_Layer: 0
+  m_Name: MuzzleFlash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1821206934276750
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
@@ -82,7 +97,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1993079276398008
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
@@ -104,11 +119,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1821206934276750}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1181, z: -0.1194}
+  m_LocalPosition: {x: 0, y: 0.11809999, z: -0.119400024}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4541537926912680}
-  m_RootOrder: 1
+  m_Father: {fileID: 4811416988512634}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4421618838372618
 Transform:
@@ -121,7 +136,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4541537926912680}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4470625661129806
 Transform:
@@ -130,11 +145,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1993079276398008}
   m_LocalRotation: {x: 0.17137623, y: -0.030376967, z: -0.016709685, w: 0.98459554}
-  m_LocalPosition: {x: -0, y: 0.0248, z: -0.2186}
+  m_LocalPosition: {x: 0, y: 0.024800003, z: -0.21860027}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4541537926912680}
-  m_RootOrder: 3
+  m_Father: {fileID: 4811416988512634}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 19.661001, y: -3.9910002, z: -2.6360002}
 --- !u!4 &4541537926912680
 Transform:
@@ -143,13 +158,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1707136771188658}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.931847, y: 0.35893178, z: -15.065132}
+  m_LocalPosition: {x: 0, y: 0, z: -35.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4811416988512634}
-  - {fileID: 4372225191019080}
   - {fileID: 4421618838372618}
-  - {fileID: 4470625661129806}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -162,9 +175,25 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4372225191019080}
+  - {fileID: 4470625661129806}
+  - {fileID: 4929939614537400}
   m_Father: {fileID: 4541537926912680}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4929939614537400
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1761727759870712}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.0006, y: 0.0452, z: 0.545}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4811416988512634}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23089358912400022
 MeshRenderer:
@@ -362,8 +391,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAmmo: 999
-  muzzleFlashes: []
-  muzzleFlashEffect: {fileID: 0}
+  muzzleFlashes:
+  - {fileID: 1761727759870712}
+  muzzleFlashEffect: {fileID: 1000010254994808, guid: 9defeac88977c0d448aa4541073ee9e4,
+    type: 2}
   impactEffect: {fileID: 1214919753986378, guid: e1d2fb22d15f9984b90613ea990ef4e7,
     type: 2}
   pulseEffects: []
@@ -382,6 +413,8 @@ MonoBehaviour:
   IsDropped: 0
   DroppedEffect: {fileID: 1535970678749264, guid: 7c4dc01f5f14d674e8117375ec02cc54,
     type: 2}
-  health: -1
+  dropOutlineSize: 0.02
+  dropColor: {r: 1, g: 0, b: 1, a: 0}
   destroyEffect: {fileID: 0}
   attributes: {fileID: 11400000, guid: 0b8a8034f5eb5064480a228fdeb8926b, type: 2}
+  _canBeDestroyed: 1

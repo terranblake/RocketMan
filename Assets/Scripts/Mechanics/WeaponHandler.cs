@@ -94,15 +94,19 @@ public class WeaponHandler : MonoBehaviour
         //Debug.Log(string.Format("{0} has {1} ammo left.", gameObject.name, currentAmmo));
 
         // Gun firing logic
-        yield return new WaitForSeconds(1.0f / (_stats.fireRate));
+        yield return new WaitForSeconds(1.0f / (_stats.fireRate * 8.0f));
         GetComponentInParent<Animator>().SetBool("Firing", false);
         _isFiring = false;
     }
 
     void ShootBullet()
     {
+        float range = _stats.range;
+        if(range == -1)
+            range = 10 * 10^10;
+
         RaycastHit hit;
-        if (Physics.Raycast(_playerCamera.transform.position, _playerCamera.transform.forward, out hit, _stats.range))
+        if (Physics.Raycast(_playerCamera.transform.position, _playerCamera.transform.forward, out hit, range))
         {
             Interactable target = hit.transform.GetComponent<Interactable>();
 

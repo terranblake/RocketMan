@@ -7,14 +7,19 @@ public class Interactable : MonoBehaviour
     public float GrabRange = 1.5f;
     public bool IsDropped = false;
     public GameObject DroppedEffect;
-    public float health = -1f;
+    [Range(0.01f, 0.1f)]
+    public float dropOutlineSize;
+    public Color dropColor;
     public GameObject destroyEffect;
     public ScriptableObject attributes;
 
     private bool _previousDroppedState = true;
     private GameObject _createdDropEffect;
-    private bool _canBeDestroyed = true;
+    public bool _canBeDestroyed = true;
     private bool _hasRigidbody = false;
+    private float _health = -1f;
+    private Material _defaultMaterial;
+    private Material _outlineMaterial;
 
     void OnDrawGizmosSelected()
     {
@@ -25,8 +30,16 @@ public class Interactable : MonoBehaviour
 
     void Awake()
     {
+        dropColor = new Color(dropColor.r, dropColor.g, dropColor.b, 1.0f);
+
+        if (GetComponent<EnergyFactory>() != null)
+        {
+            Resource stats = (Resource)attributes;
+            _health = stats.harvestAmount;
+        }
+
         // Set Indestructible and Interactable Layers before anything else runs
-        if (health == -1)
+        if (_health == -1)
             _canBeDestroyed = false;
     }
 
@@ -42,6 +55,9 @@ public class Interactable : MonoBehaviour
 
     void Update()
     {
+        if (GetComponent<EnergyFactory>() != null)
+            return;
+
         // If a rigidbody exists, we are in the process of propping it up
         if (_hasRigidbody == true)
             ProppingUpInteractable();
@@ -85,17 +101,52 @@ public class Interactable : MonoBehaviour
         _createdDropEffect = Instantiate(DroppedEffect, transform);
         Debug.Log(string.Format("Created drop effect on {0}", transform.name));
 
+        // TODO :: Dependent on Interactables having a child GameObject with the same name as its parent
+        // Change shader to outline
+        UpdateAllMaterials(GameObject.Find(transform.name).GetComponent<Renderer>(), "Standard", "Outlined/Diffuse");
+
         // Dropped effect should always contain a Particle System
         ParticleSystem droppedParticles = _createdDropEffect.GetComponent<ParticleSystem>();
+        
+        // Allow for editting of particle system's color
+        ParticleSystem.MainModule mainModule = droppedParticles.main;
+        mainModule.startColor = new Color(dropColor.r, dropColor.g, dropColor.b, 63);
+
         droppedParticles.Play();
     }
 
     void InInventory()
     {
+        // TODO :: Dependent on Interactables having a child GameObject with the same name as its parent
+        // Change shader to outline
+        UpdateAllMaterials(GameObject.Find(transform.name).GetComponent<Renderer>(), "Outlined/Diffuse", "Standard");
+
         // If the item is in the player's inventory, then
         //  we want to destroy the existing effect
         if (_createdDropEffect != null)
             Destroy(_createdDropEffect);
+    }
+
+    void UpdateAllMaterials(Renderer renderer, string from, string to)
+    {
+        // Loop through all materials (from -> to) in renderer
+        Material[] updatedMaterials = renderer.materials;
+
+        for (int x = 0; x < updatedMaterials.Length; x++)
+        {
+            Material material = new Material(updatedMaterials[x]);
+            material.shader = Shader.Find(to);
+
+            if (to == "Outlined/Diffuse")
+            {
+                material.SetColor("_OutlineColor", dropColor);
+                material.SetFloat("_OutlineWidth", dropOutlineSize);
+            }
+            updatedMaterials[x] = material;
+
+        }
+        renderer.materials = updatedMaterials;
+
     }
 
     void ProppingUpInteractable()
@@ -107,7 +158,7 @@ public class Interactable : MonoBehaviour
             if (rb.velocity == new Vector3(0, 0, 0))
             {
                 Destroy(rb);
-                ScaleColliderSize(gameObject.GetComponent<BoxCollider>(), 0.5f);
+                ScaleColliderSize(gameObject.GetComponent<BoxCollider>(), 0.05f, 0.25f, 1.0f);
 
                 _hasRigidbody = false;
             }
@@ -115,39 +166,41 @@ public class Interactable : MonoBehaviour
         else
         {
             gameObject.AddComponent<Rigidbody>();
-            ScaleColliderSize(gameObject.GetComponent<BoxCollider>(), 2.0f);
+            ScaleColliderSize(gameObject.GetComponent<BoxCollider>(), 20.0f, 4.0f, 1.0f);
 
             _hasRigidbody = true;
         }
     }
 
-    void ScaleColliderSize(BoxCollider collider, float newY)
+    void ScaleColliderSize(BoxCollider collider, float multX, float multY, float multZ)
     {
-        collider.size = new Vector3(collider.size.x, collider.size.y * newY, collider.size.z);
+        collider.size = new Vector3(collider.size.x * multX, collider.size.y * multY, collider.size.z * multZ);
     }
 
     public void TakeDamage(float amount)
     {
         // Interactable can be destroyed
-        if (_canBeDestroyed)
+        if (_canBeDestroyed && _health > 0)
         {
             // Decrement health
-            health -= amount;
+            _health -= amount;
             Debug.Log(string.Format(
                 "Removed {0} hp from {1}.\n{1} has {2} hp remaining.",
                 amount,
                 gameObject.name,
-                health
+                _health
             ));
 
-            // Health is less than/equal to 0
-            if (health <= 0)
+            // _health is less than/equal to 0
+            if (_health <= 0)
                 DestroyMe();
         }
     }
 
     void DestroyMe()
     {
+        GetComponent<Collider>().enabled = false;
+
         // Temporary environment destruction effect
         if (gameObject.transform.parent.name == "Environment")
         {

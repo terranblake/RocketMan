@@ -29,6 +29,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1065845633977442
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4001258839521246}
+  m_Layer: 0
+  m_Name: MuzzleFlash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1349024533557954
 GameObject:
   m_ObjectHideFlags: 1
@@ -57,7 +72,7 @@ GameObject:
   - component: {fileID: 33954032640320568}
   - component: {fileID: 23468493498625460}
   m_Layer: 0
-  m_Name: AssaultRifle_Mesh
+  m_Name: AssaultRifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,6 +95,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4001258839521246
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1065845633977442}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.0011, y: 0.034, z: 0.3504}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4954071147591150}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4652860026497220
 Transform:
   m_ObjectHideFlags: 1
@@ -87,7 +115,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1023204021339320}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.039095685, y: 0.35893178, z: -9.077783}
+  m_LocalPosition: {x: -15.49, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4656399013344366}
@@ -132,6 +160,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4776386153445978}
+  - {fileID: 4001258839521246}
   m_Father: {fileID: 4652860026497220}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -287,8 +316,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAmmo: 999
-  muzzleFlashes: []
-  muzzleFlashEffect: {fileID: 0}
+  muzzleFlashes:
+  - {fileID: 1065845633977442}
+  muzzleFlashEffect: {fileID: 1000010254994808, guid: 9defeac88977c0d448aa4541073ee9e4,
+    type: 2}
   impactEffect: {fileID: 1214919753986378, guid: e1d2fb22d15f9984b90613ea990ef4e7,
     type: 2}
   pulseEffects: []
@@ -307,6 +338,8 @@ MonoBehaviour:
   IsDropped: 0
   DroppedEffect: {fileID: 1535970678749264, guid: 7c4dc01f5f14d674e8117375ec02cc54,
     type: 2}
-  health: -1
+  dropOutlineSize: 0.02
+  dropColor: {r: 1, g: 0, b: 1, a: 0}
   destroyEffect: {fileID: 0}
   attributes: {fileID: 11400000, guid: c35687d6fe4d5254c8e39980e331c4bb, type: 2}
+  _canBeDestroyed: 1
