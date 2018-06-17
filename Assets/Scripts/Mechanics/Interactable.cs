@@ -18,6 +18,7 @@ public class Interactable : MonoBehaviour
     private GameObject _createdDropEffect;
     public bool _canBeDestroyed = true;
     private bool _hasRigidbody = false;
+    private bool _effectsSet = false;
     private float _health = -1f;
     private Material _defaultMaterial;
     private Material _outlineMaterial;
@@ -44,6 +45,8 @@ public class Interactable : MonoBehaviour
             _canBeDestroyed = false;
     }
 
+
+
     void OnCollisionEnter(Collision collider)
     {
         // Add this Interactable's collider to the list ignored collisions
@@ -58,16 +61,6 @@ public class Interactable : MonoBehaviour
     {
         if (GetComponent<EnergyFactory>() != null)
             return;
-        else if (attributes.name == "Energy" && GetComponentInChildren<ParticleSystem>() != null)
-        {
-            Debug.Log("Attribute Name\t" + attributes.name);
-            // Dropped effect should always contain a Particle System
-            ParticleSystem energyParticleSystem = GetComponentInChildren<ParticleSystem>();
-
-            // Allow for editting of particle system's main module
-            ParticleSystem.MainModule mainModule = energyParticleSystem.main;
-            mainModule.startSize = particleStartSize;
-        }
 
         // If a rigidbody exists, we are propping it up
         if (_hasRigidbody == true)
@@ -124,6 +117,10 @@ public class Interactable : MonoBehaviour
 
         // Allow for editting of particle system's color
         ParticleSystem.MainModule mainModule = droppedParticles.main;
+
+        if(attributes.GetType() == typeof(Energy))
+            mainModule.startSize = particleStartSize;
+
         mainModule.startColor = new Color(dropColor.r, dropColor.g, dropColor.b, 63);
 
         droppedParticles.Play();
@@ -179,7 +176,7 @@ public class Interactable : MonoBehaviour
         }
         else
         {
-            if(GetComponent<Rigidbody>() == null)
+            if (GetComponent<Rigidbody>() == null)
                 gameObject.AddComponent<Rigidbody>();
 
             ScaleColliderSize(gameObject.GetComponent<BoxCollider>(), 20.0f, 4.0f, 1.0f);

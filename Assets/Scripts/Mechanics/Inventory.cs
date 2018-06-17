@@ -11,7 +11,7 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(Transform Item)
     {
-        bool checkForEnergy = IsItemEnergy(Item);
+        bool checkForEnergy = IsEnergy(Item);
         if(checkForEnergy == true){
             Destroy(Item.gameObject);
             return;
@@ -146,7 +146,7 @@ public class Inventory : MonoBehaviour
         Debug.Log(items);
     }
 
-    private bool IsItemEnergy(Transform Item)
+    private bool IsEnergy(Transform Item)
     {
         ScriptableObject temp = Item.GetComponent<Interactable>().attributes;
         if (temp.GetType() == typeof(Energy))

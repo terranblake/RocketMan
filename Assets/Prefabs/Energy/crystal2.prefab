@@ -129,7 +129,7 @@ MonoBehaviour:
   DroppedEffect: {fileID: 1992544967219960, guid: 85a2592213ad1714c8d09f6d888d90c6,
     type: 2}
   dropOutlineSize: 0.05
-  particleStartSize: 0.05
+  particleStartSize: 0.25
   dropColor: {r: 0, g: 1, b: 1, a: 0}
   destroyEffect: {fileID: 0}
   attributes: {fileID: 0}

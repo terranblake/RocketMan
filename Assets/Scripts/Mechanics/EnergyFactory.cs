@@ -26,7 +26,7 @@ public class EnergyFactory : MonoBehaviour
 
         // Physically create the Energy object
         if (render == true)
-            CreateEnergy(from, direction, (int)Mathf.Ceil(amount));
+            CreateEnergy(from, direction, amount);
 
         return amount;
     }
