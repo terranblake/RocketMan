@@ -7,7 +7,6 @@ public class ProjectileLauncher : MonoBehaviour
     private bool _selfDestructs = false;
     public void LaunchProjectile(Vector3 fromHere, Vector3 rotateLike, float throwForce, bool selfDestructs)
     {
-		Debug.Log(ProjectileType.name);
 		GameObject projectile;
 
 		if(ProjectileType.GetComponent<Grenade>() == null)
@@ -15,10 +14,11 @@ public class ProjectileLauncher : MonoBehaviour
 		else
 			projectile = Instantiate(ProjectileType, fromHere, Quaternion.LookRotation(rotateLike));
 
+        Debug.Log(string.Format("Launching {0} from position {1}", ProjectileType.name, fromHere));
+
         if (isSticky == true)
             projectile.AddComponent<Sticky>();
 
-        Debug.Log(string.Format("Launching {0}.", projectile.name));
         projectile.GetComponent<Rigidbody>().AddForce(rotateLike * throwForce);
 
         if (selfDestructs == true)

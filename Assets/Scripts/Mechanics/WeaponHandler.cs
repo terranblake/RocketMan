@@ -136,7 +136,7 @@ public class WeaponHandler : MonoBehaviour
                     int overflowEnergy = transform.parent.GetComponent<Inventory>().AddEnergy(energyToAdd);
 
                     if (overflowEnergy > 0)
-                        factory.Harvest(hit.transform.position, hit.normal, overflowEnergy * 5, overflowEnergy * 5, true);
+                        factory.Harvest(hit.point, hit.normal, overflowEnergy * 5, overflowEnergy * 5, true);
                 }
 
                 target.TakeDamage(_stats.damage);

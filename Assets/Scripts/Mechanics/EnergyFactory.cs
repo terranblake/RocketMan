@@ -34,7 +34,7 @@ public class EnergyFactory : MonoBehaviour
     void CreateEnergy(Vector3 from, Vector3 direction, int amount)
     {
 		// Instantiate new Energy prefab and get a reference to its interaction component
-        GameObject energy = Instantiate(EnergyPrefab, Vector3.forward, Quaternion.identity);
+        GameObject energy = Instantiate(EnergyPrefab, new Vector3(from.x, from.y, from.z), Quaternion.Euler(-90f, 0, 0));
         Interactable interact = energy.GetComponent<Interactable>();
 
 		// If it has one, then create a new Energy ScriptableObject and add it to the object
@@ -42,8 +42,8 @@ public class EnergyFactory : MonoBehaviour
             interact.attributes = new Energy(amount);
 
 		// Set the launcher projectile to the newly created Energy instance, then launch
-        _launcher.ProjectileType = energy;
-        _launcher.LaunchProjectile(from, direction, 0f, false);
+        //_launcher.ProjectileType = energy;
+        //_launcher.LaunchProjectile(from, direction, 0f, false);
 
 		Debug.Log(string.Format("Created {0} Energy from {1}", amount, transform.name));
     }
