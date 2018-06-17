@@ -419,8 +419,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1274835536596690}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 12.79}
+  m_LocalRotation: {x: -0, y: -0.70710707, z: -0, w: 0.7071066}
+  m_LocalPosition: {x: 2.84, y: 5.25, z: -3.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4768816425664010}
@@ -428,7 +428,7 @@ Transform:
   - {fileID: 4485663152499002}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 0}
 --- !u!4 &4889859171100924
 Transform:
   m_ObjectHideFlags: 1
@@ -938,10 +938,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GrabRange: 1.5
   IsDropped: 0
-  DroppedEffect: {fileID: 1535970678749264, guid: 7c4dc01f5f14d674e8117375ec02cc54,
+  DroppedEffect: {fileID: 1992544967219960, guid: 85a2592213ad1714c8d09f6d888d90c6,
     type: 2}
-  dropOutlineSize: 0.02
-  dropColor: {r: 1, g: 0, b: 1, a: 0}
+  dropOutlineSize: 0.03
+  particleStartSize: 0
+  dropColor: {r: 0, g: 0, b: 1, a: 1}
   destroyEffect: {fileID: 0}
   attributes: {fileID: 11400000, guid: ed83552960e5e6148bda7ba3339e27a0, type: 2}
   _canBeDestroyed: 1
@@ -972,8 +973,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1274835536596690}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b07586d6cc0da344804e2b71e6b7d08, type: 3}
+  m_Script: {fileID: 11500000, guid: ff53015960861e84f974854518811117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AmmoType: {fileID: 1038419541494822, guid: e7994896aeff7de4395a55b938caa9d3, type: 2}
+  ProjectileType: {fileID: 1038419541494822, guid: e7994896aeff7de4395a55b938caa9d3,
+    type: 2}
   isSticky: 0

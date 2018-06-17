@@ -13,7 +13,7 @@ public class Grenade : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		_countdown = delay;
+		_countdown = delay;	
 	}
 	
 	// Update is called once per frame

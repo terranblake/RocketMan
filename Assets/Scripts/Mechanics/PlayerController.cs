@@ -9,10 +9,12 @@ public class PlayerController : MonoBehaviour
     public Camera PlayerCamera;
     public Inventory inventory;
 
+    private int _energy;
+
     void Awake()
     {
         Debug.Log(string.Format("Ignoring collision between <{0}> and <{1}>", LayerMask.LayerToName(8), LayerMask.LayerToName(9)));
-        Debug.Log(Physics.GetIgnoreLayerCollision(8, 9));
+        Physics.GetIgnoreLayerCollision(8, 9);
     }
 
     void Start()

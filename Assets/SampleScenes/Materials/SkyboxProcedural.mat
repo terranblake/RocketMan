@@ -61,7 +61,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EmissionScaleUI: 1
-    - _Exposure: 0.9
+    - _Exposure: 0.5
     - _Glossiness: 0
     - _HdrExposure: 0.8
     - _Lightmapping: 1
@@ -81,7 +81,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColorUI: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColorWithMapUI: {r: 1, g: 1, b: 1, a: 1}
-    - _GroundColor: {r: 0, g: 0.4022242, b: 0.5176471, a: 1}
+    - _GroundColor: {r: 1, g: 0.49803922, b: 1, a: 1}
     - _SkyEquatorColor: {r: 0.188311, g: 0.24798155, b: 0.31617647, a: 1}
     - _SkyMidColor: {r: 0.13327208, g: 0.16961901, b: 0.21323532, a: 1}
     - _SkyTint: {r: 0, g: 0, b: 0, a: 1}

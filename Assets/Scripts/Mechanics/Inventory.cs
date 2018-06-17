@@ -4,10 +4,18 @@ public class Inventory : MonoBehaviour
 {
     public bool DebuggingActive = false;
     public int maxItems = 5;
+    public int maxEnergy = 999;
     public int selectedItem = 0;
+
+    public int _energyCount = 0;
 
     public void AddItem(Transform Item)
     {
+        bool checkForEnergy = IsItemEnergy(Item);
+        if(checkForEnergy == true){
+            Destroy(Item.gameObject);
+            return;
+        }
 
         // Check if inventory is full
         if (transform.childCount < maxItems)
@@ -41,6 +49,26 @@ public class Inventory : MonoBehaviour
         {
             Debug.Log("Inventory is full.");
         }
+    }
+
+    public int AddEnergy(int amount)
+    {
+        Debug.Log(string.Format("Adding {0} energy to player's {1}", amount, _energyCount));
+
+        if (_energyCount == 999)
+        {
+            Debug.Log("Energy capacity reached.");
+            return amount;
+        }
+
+        _energyCount = _energyCount + amount;
+        if (_energyCount > maxEnergy)
+        {
+            _energyCount = 999;
+            return (_energyCount + amount) - 999;
+        }
+        return 0;
+
     }
 
     public void DropItem()
@@ -116,6 +144,19 @@ public class Inventory : MonoBehaviour
         }
 
         Debug.Log(items);
+    }
+
+    private bool IsItemEnergy(Transform Item)
+    {
+        ScriptableObject temp = Item.GetComponent<Interactable>().attributes;
+        if (temp.GetType() == typeof(Energy))
+        {
+            Energy toConsume = (Energy)temp;
+            AddEnergy(toConsume.Consume());
+            return true;
+        }
+        return false;
+
     }
 
     void IncrementSelectedItem()

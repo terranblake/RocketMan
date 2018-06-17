@@ -9,6 +9,7 @@ public class Interactable : MonoBehaviour
     public GameObject DroppedEffect;
     [Range(0.01f, 0.1f)]
     public float dropOutlineSize;
+    public float particleStartSize;
     public Color dropColor;
     public GameObject destroyEffect;
     public ScriptableObject attributes;
@@ -57,8 +58,18 @@ public class Interactable : MonoBehaviour
     {
         if (GetComponent<EnergyFactory>() != null)
             return;
+        else if (attributes.name == "Energy" && GetComponentInChildren<ParticleSystem>() != null)
+        {
+            Debug.Log("Attribute Name\t" + attributes.name);
+            // Dropped effect should always contain a Particle System
+            ParticleSystem energyParticleSystem = GetComponentInChildren<ParticleSystem>();
 
-        // If a rigidbody exists, we are in the process of propping it up
+            // Allow for editting of particle system's main module
+            ParticleSystem.MainModule mainModule = energyParticleSystem.main;
+            mainModule.startSize = particleStartSize;
+        }
+
+        // If a rigidbody exists, we are propping it up
         if (_hasRigidbody == true)
             ProppingUpInteractable();
 
@@ -86,13 +97,16 @@ public class Interactable : MonoBehaviour
         // Methods for handling effect changes based on whether
         //      this Interactable is in a player's inventory
 
-        if (IsDropped == true)
+        if (attributes.name != "Harvester")
         {
-            ProppingUpInteractable();
-            NotInInventory();
+            if (IsDropped == true)
+            {
+                ProppingUpInteractable();
+                NotInInventory();
+            }
+            else
+                InInventory();
         }
-        else
-            InInventory();
     }
 
     void NotInInventory()
@@ -107,7 +121,7 @@ public class Interactable : MonoBehaviour
 
         // Dropped effect should always contain a Particle System
         ParticleSystem droppedParticles = _createdDropEffect.GetComponent<ParticleSystem>();
-        
+
         // Allow for editting of particle system's color
         ParticleSystem.MainModule mainModule = droppedParticles.main;
         mainModule.startColor = new Color(dropColor.r, dropColor.g, dropColor.b, 63);
@@ -165,9 +179,10 @@ public class Interactable : MonoBehaviour
         }
         else
         {
-            gameObject.AddComponent<Rigidbody>();
-            ScaleColliderSize(gameObject.GetComponent<BoxCollider>(), 20.0f, 4.0f, 1.0f);
+            if(GetComponent<Rigidbody>() == null)
+                gameObject.AddComponent<Rigidbody>();
 
+            ScaleColliderSize(gameObject.GetComponent<BoxCollider>(), 20.0f, 4.0f, 1.0f);
             _hasRigidbody = true;
         }
     }
@@ -195,6 +210,11 @@ public class Interactable : MonoBehaviour
             if (_health <= 0)
                 DestroyMe();
         }
+    }
+
+    public float GetHealth()
+    {
+        return this._health;
     }
 
     void DestroyMe()
