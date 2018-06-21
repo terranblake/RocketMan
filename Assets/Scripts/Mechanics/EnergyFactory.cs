@@ -42,8 +42,8 @@ public class EnergyFactory : MonoBehaviour
             interact.attributes = new Energy(amount);
 
 		// Set the launcher projectile to the newly created Energy instance, then launch
-        //_launcher.ProjectileType = energy;
-        //_launcher.LaunchProjectile(from, direction, 0f, false);
+        _launcher.ProjectileType = energy;
+        _launcher.LaunchProjectile(from, direction, 5f, false);
 
 		Debug.Log(string.Format("Created {0} Energy from {1}", amount, transform.name));
     }

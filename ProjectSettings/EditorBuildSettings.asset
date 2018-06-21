@@ -6,5 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Experimental.unity
-    guid: ad9194ec885db5f4a8e240758456226a
+    path: Assets/Scenes/PreLobby.unity
+    guid: 0e35fde5de56196458a51e8c6b6b3993
+  - enabled: 1
+    path: Assets/Scenes/Mechanics.unity
+    guid: 3d032d452b41e6a45b976157405cc1bb
+  m_configObjects: {}

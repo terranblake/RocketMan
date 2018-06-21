@@ -6,8 +6,8 @@ public class WeaponHandler : MonoBehaviour
 {
     public int maxAmmo = 999;
     public GameObject[] muzzleFlashes;
-    public GameObject muzzleFlashEffect;
-    public GameObject impactEffect;
+    public string muzzleFlashEffect;
+    public string impactEffect;
     public PulseEffect[] pulseEffects;
 
     private Camera _playerCamera;
@@ -16,12 +16,18 @@ public class WeaponHandler : MonoBehaviour
     private ProjectileLauncher _grenadeThrower;
     private bool _isFiring = false;
     private Weapon _stats;
+    private NetworkedActions _networkActions;
+
+    void Awake()
+    {
+        GameObject go = GameObject.Find("NetworkActions");
+        _networkActions = go.GetComponent<NetworkedActions>();
+    }
 
     void Start()
     {
         if (currentAmmo == -1)
             currentAmmo = maxAmmo;
-
         // currentAmmo = _stats.clipSize
     }
 
@@ -75,14 +81,16 @@ public class WeaponHandler : MonoBehaviour
         foreach (GameObject location in muzzleFlashes)
         {
             // Instantiate new effect object and set parent
-            GameObject muzzleFlash = Instantiate(muzzleFlashEffect, location.transform.position, Quaternion.LookRotation(location.transform.forward));
-            muzzleFlash.transform.SetParent(gameObject.transform);
+            //GameObject muzzleFlash = Instantiate(muzzleFlashEffect, location.transform.position, Quaternion.LookRotation(location.transform.forward));
+            //muzzleFlash.transform.SetParent(gameObject.transform);
 
             // Start associated particle system
-            muzzleFlash.GetComponent<ParticleSystem>().Play();
+            //muzzleFlash.GetComponent<ParticleSystem>().Play();
 
             // Destroy after half second
-            Destroy(muzzleFlash, 0.5f);
+            //Destroy(muzzleFlash, 0.5f);
+
+            _networkActions.ParticleEffect(muzzleFlashEffect, gameObject.transform.position, location.transform.forward, 0.5f);
         }
 
         // If weapon has grenade throwing abilities
@@ -121,11 +129,6 @@ public class WeaponHandler : MonoBehaviour
                 hit.transform.position
             ));
 
-            Debug.Log(string.Format(
-                "HIT NORMAL\t{0}",
-                hit.normal
-            ));
-
             if (target != null)
             {
                 // If this Interactable has an energy factory and we are using a harvesting tool
@@ -145,8 +148,9 @@ public class WeaponHandler : MonoBehaviour
             if (hit.rigidbody != null)
                 hit.rigidbody.AddForce(-hit.normal * _stats.impactForce);
 
-            GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
-            Destroy(impactGO, 2f);
+            //GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
+            //Destroy(impactGO, 2f);
+            _networkActions.ImpactEffect(impactEffect, hit.point, hit.normal, 2.0f);
         }
     }
 }

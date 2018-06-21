@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public Transform Head;
-    public Transform Body;
-    public Transform ItemHolder;
     public Camera PlayerCamera;
     public Inventory inventory;
 
@@ -20,24 +17,34 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         // Initialize inventory selection
-        inventory.SelectItem();
+        //inventory.SelectItem();
     }
 
     void Update()
     {
-        // Check for updates to inventory
-        inventory.ItemSelection();
-
-        // Add item to inventory
-        if (Input.GetKeyDown(KeyCode.E))
+        if (inventory == null)
         {
-            CastForInteractables();
+            Inventory temp = gameObject.GetComponentInChildren<Inventory>();
+
+            if (temp != null)
+                inventory = temp;
         }
-
-        // Drop item from inventory
-        if (Input.GetKeyDown(KeyCode.Q))
+        else
         {
-            inventory.DropItem();
+            // Check for updates to inventory
+            inventory.ItemSelection();
+
+            // Add item to inventory
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                CastForInteractables();
+            }
+
+            // Drop item from inventory
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                inventory.DropItem();
+            }
         }
     }
 
@@ -50,11 +57,10 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(PlayerCamera.transform.position, PlayerCamera.transform.forward, out hit, 1.5f, layerMask))
         {
             Interactable interactable = hit.transform.GetComponent<Interactable>();
-            // Check type of interactable
-
             if (interactable != null)
             {
-                inventory.AddItem(hit.transform);
+                if (hit.transform.tag != "Environment")
+                    inventory.SelectionFiltering(hit.transform);
             }
         }
     }

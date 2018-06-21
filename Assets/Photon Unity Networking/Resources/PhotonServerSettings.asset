@@ -42,4 +42,18 @@ MonoBehaviour:
   - RequestForPickupItems
   - RequestForPickupTimes
   - TaggedPlayer
+  - Fire
+  - FireBullet
+  - DestroyObject
+  - SetGameObjectState
+  - UpdateCollider
+  - UpdateTransform
+  - DestroyGameObject
+  - DestructionEffect
+  - DoMuzzleFlash
+  - UpdateHealth
+  - UpdateIgnoredCollisions
+  - ImpactEffect
+  - ParticleEffect
+  - DestroyDropEffect
   DisableAutoOpenWizard: 1
